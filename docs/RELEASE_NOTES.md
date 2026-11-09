@@ -1,13 +1,9 @@
-# L2 ChangeGuard v0.1.0 — Initial public release
+# L2 ChangeGuard v0.1.1 — Maintenance release
 
-Primeira versão pública: verificação de alterações de switches Layer 2, **somente offline**.
+This patch release incorporates GitHub Actions dependency upgrades already validated on the `main` branch.
 
-- Oito regras auditáveis de LLDP, VLAN, STP, observações MAC e hardening.
-- Análise de baseline e candidato; classificação de novas ocorrências, resoluções e riscos persistentes.
-- Saídas JSON/SARIF, fingerprints estáveis, limiar de bloqueio configurável.
-- Validação estrita de entrada, exemplos fictícios, testes e CI multiplataforma.
-- ZIP de fontes, manifesto SHA-256 por arquivo e SHA256SUMS; licença MIT.
+- Update `actions/checkout` to v7.0.1 and `actions/setup-python` to v7.1.0, both pinned to reviewed commit SHAs.
+- Retain the eight offline Layer 2 audit checks, baseline comparison, JSON/SARIF reporting, and existing model limitations without changing the detection engine.
+- Build source ZIP, per-file SHA-256 manifest, and release checksums from the exact commit passing CI.
 
-**Limitações:** os alertas são indicativos; não há acesso a switches, implementação de SNMP/SSH, tradução de comandos de fabricantes, modelo completo de STP/LACP/MLAG ou prova de loops. Consulte `README.md`, `docs/THREAT_MODEL.md` e `docs/SCHEMA.md`.
-
-Esta versão só deve ser publicada após conclusão verde do workflow CI para o commit exato de `main`.
+This release does not modify network devices or access live environments. Previous release `v0.1.0` remains immutable.
