@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=75,<84"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "l2-changeguard"
+version = "0.1.0"
+description = "Deterministic offline Layer 2 network change and security audit gate"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "Felipe Silva"}]
+keywords = ["network-security", "network-operations", "lldp", "vlan", "stp", "sarif"]
+classifiers = ["Programming Language :: Python :: 3", "Operating System :: OS Independent", "Topic :: System :: Networking", "Topic :: Security"]
+dependencies = []
+
+[project.scripts]
+l2changeguard = "l2_changeguard.cli:main"
+
+[project.urls]
+Source = "https://github.com/felipewatter/l2-changeguard"
+Issues = "https://github.com/felipewatter/l2-changeguard/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

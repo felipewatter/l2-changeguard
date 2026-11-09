@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "devices": [
+    {
+      "id": "sw-core",
+      "ports": [
+        {
+          "id": "ge-0/0/1",
+          "mode": "trunk",
+          "native_vlan": 999,
+          "allowed_vlans": [
+            10,
+            20,
+            999
+          ],
+          "admin_up": true,
+          "stp": {
+            "10": "forwarding",
+            "20": "forwarding"
+          },
+          "lldp": {
+            "device": "sw-dist1",
+            "port": "ge-0/0/1"
+          }
+        },
+        {
+          "id": "ge-0/0/2",
+          "mode": "trunk",
+          "native_vlan": 999,
+          "allowed_vlans": [
+            10,
+            20,
+            999
+          ],
+          "admin_up": true,
+          "stp": {
+            "10": "forwarding",
+            "20": "forwarding"
+          },
+          "lldp": {
+            "device": "sw-dist2",
+            "port": "ge-0/0/1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw-dist1",
+      "ports": [
+        {
+          "id": "ge-0/0/1",
+          "mode": "trunk",
+          "native_vlan": 999,
+          "allowed_vlans": [
+            10,
+            20,
+            999
+          ],
+          "admin_up": true,
+          "stp": {
+            "10": "forwarding",
+            "20": "forwarding"
+          },
+          "lldp": {
+            "device": "sw-core",
+            "port": "ge-0/0/1"
+          }
+        },
+        {
+          "id": "ge-0/0/2",
+          "mode": "trunk",
+          "native_vlan": 999,
+          "allowed_vlans": [
+            10,
+            999
+          ],
+          "admin_up": true,
+          "stp": {
+            "10": "forwarding"
+          },
+          "lldp": {
+            "device": "sw-dist2",
+            "port": "ge-0/0/2"
+          }
+        },
+        {
+          "id": "ge-0/0/3",
+          "mode": "access",
+          "access_vlan": 10,
+          "bpdu_guard": false,
+          "port_security": true,
+          "admin_up": true,
+          "stp": {
+            "10": "forwarding"
+          },
+          "macs": [
+            {
+              "address": "02:00:00:00:00:01",
+              "vlan": 10
+            },
+            {
+              "address": "02:00:00:00:00:02",
+              "vlan": 10
+            }
+          ]
+        },
+        {
+          "id": "ge-0/0/4",
+          "mode": "access",
+          "access_vlan": 10,
+          "bpdu_guard": true,
+          "port_security": true,
+          "admin_up": true,
+          "stp": {
+            "10": "forwarding"
+          },
+          "macs": [
+            {
+              "address": "02:00:00:00:00:02",
+              "vlan": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sw-dist2",
+      "ports": [
+        {
+          "id": "ge-0/0/1",
+          "mode": "trunk",
+          "native_vlan": 999,
+          "allowed_vlans": [
+            10,
+            20,
+            999
+          ],
+          "admin_up": true,
+          "stp": {
+            "10": "forwarding",
+            "20": "forwarding"
+          },
+          "lldp": {
+            "device": "sw-core",
+            "port": "ge-0/0/2"
+          }
+        },
+        {
+          "id": "ge-0/0/2",
+          "mode": "trunk",
+          "native_vlan": 999,
+          "allowed_vlans": [
+            10,
+            20,
+            999
+          ],
+          "admin_up": true,
+          "stp": {
+            "10": "forwarding",
+            "20": "forwarding"
+          },
+          "lldp": {
+            "device": "sw-dist1",
+            "port": "ge-0/0/2"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "protected_vlans": [10, 20],
+  "allowed_native_vlans": [999],
+  "critical_devices": ["sw-core"],
+  "require_access_bpdu_guard": true,
+  "require_access_port_security": true
+}
