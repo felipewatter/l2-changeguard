@@ -6,6 +6,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 from io import StringIO
+from l2_changeguard import __version__
 from l2_changeguard.cli import run
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -66,7 +67,7 @@ class CliTest(unittest.TestCase):
     def test_cli_module_smoke(self):
         code=subprocess.run([sys.executable,'-m','l2_changeguard','--version'],capture_output=True,text=True,check=False)
         self.assertEqual(code.returncode,0)
-        self.assertIn('0.1.0',code.stdout)
+        self.assertIn(__version__,code.stdout)
 
     def test_refuse_output_unwritable(self):
         with tempfile.TemporaryDirectory() as d:

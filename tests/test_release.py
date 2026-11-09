@@ -7,15 +7,17 @@ import tempfile
 import unittest
 import zipfile
 from pathlib import Path
+from l2_changeguard import __version__
 
 ROOT=Path(__file__).resolve().parents[1]
+PREFIX = f'l2-changeguard-v{__version__}'
 
 
 class ReleaseTest(unittest.TestCase):
     def produce(self,folder):
         result=subprocess.run([sys.executable,str(ROOT/'scripts/build_release.py'),str(folder)],capture_output=True,text=True,check=False)
         self.assertEqual(result.returncode,0,result.stderr)
-        return (folder/'l2-changeguard-v0.1.0-source.zip',folder/'l2-changeguard-v0.1.0-manifest.json',folder/'l2-changeguard-v0.1.0-SHA256SUMS.txt')
+        return (folder/f'{PREFIX}-source.zip',folder/f'{PREFIX}-manifest.json',folder/f'{PREFIX}-SHA256SUMS.txt')
 
     def test_manifest_matches_zip(self):
         with tempfile.TemporaryDirectory() as d:
@@ -25,7 +27,7 @@ class ReleaseTest(unittest.TestCase):
                 paths=z.namelist()
                 self.assertEqual(len(paths),len(m['sha256']))
                 for item in paths:
-                    self.assertTrue(item.startswith('l2-changeguard-v0.1.0/'))
+                    self.assertTrue(item.startswith(f'{PREFIX}/'))
                     self.assertNotIn('..',item.split('/'))
                     rel=item.split('/',1)[1]
                     self.assertEqual(hashlib.sha256(z.read(item)).hexdigest(),m['sha256'][rel])
@@ -58,7 +60,7 @@ class ReleaseTest(unittest.TestCase):
             with zipfile.ZipFile(archive) as z:
                 paths=set(z.namelist())
                 for f in ('README.md','LICENSE','SECURITY.md','pyproject.toml','.github/workflows/ci.yml','.github/workflows/release.yml','docs/THREAT_MODEL.md'):
-                    self.assertIn('l2-changeguard-v0.1.0/'+f,paths)
+                    self.assertIn(f'{PREFIX}/'+f,paths)
 
 
 if __name__ == '__main__':
